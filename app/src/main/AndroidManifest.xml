@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.crakama.hangmandroidclient">
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+    package="com.crakama.hangmandroid">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+>>>>>>> a661645... "set up TCP server client communication"
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
