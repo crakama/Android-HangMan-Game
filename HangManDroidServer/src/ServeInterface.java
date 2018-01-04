@@ -1,13 +1,12 @@
-package com.crakama;
-
 import java.io.IOException;
 import java.net.Socket;
 
 /**
- * Created by kate on 03/01/2018.
+ * Created by kate on 02/01/2018.
  */
 
 public interface ServeInterface {
+
     void startGame(ConnectionHandler connectionHandler, Socket clientSocket) throws IOException, ClassNotFoundException;
     void initializeGame(Socket clientSocket) throws IOException;
 

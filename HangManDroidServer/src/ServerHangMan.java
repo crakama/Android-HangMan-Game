@@ -1,5 +1,3 @@
-package com.crakama.hangmandroid.services;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +10,7 @@ public class ServerHangMan {
     ServerSocket serverSocket;
     Socket clientSocket;
     public static void main(String[] args){
-        int DEFAULT_PORT = 1236;
+        int DEFAULT_PORT = 1212;
         try {
             new ServerHangMan().initConnection(DEFAULT_PORT);
         } catch (IOException | ClassNotFoundException e) {

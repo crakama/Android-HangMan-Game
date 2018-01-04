@@ -1,12 +1,10 @@
-package com.crakama;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * Created by kate on 03/01/2018.
+ * Created by kate on 02/01/2018.
  */
 
 public class ConnectionHandler {

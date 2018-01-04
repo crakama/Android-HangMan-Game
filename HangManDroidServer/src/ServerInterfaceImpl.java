@@ -1,5 +1,3 @@
-package com.crakama;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,10 +8,10 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /**
- * Created by kate on 03/01/2018.
+ * Created by kate on 02/01/2018.
  */
 
-public class ServerInterfaceImpl implements ServeInterface{
+public class ServerInterfaceImpl implements ServeInterface {
     private int failedAttempts = 0;
     private int score = 0; // +=1 when user score and -=1 when server score
     private String currentWord;
@@ -56,13 +54,13 @@ public class ServerInterfaceImpl implements ServeInterface{
     @Override
     public void initializeGame(Socket clientSocket) throws IOException {
         //Send game instructions
-        String welcomemessage = "Welcome to HangMan. I will pick a word and you will try to guess it character by character.\n" +
+        String wordPicked = "Welcome to HangMan. I will pick a word and you will try to guess it character by character.\n" +
                 "If you guess wrong 6 times...I WIN! If you get the word before hand...YOU WIN!.\n" +
                 "Every time you guess a character incorrectly, the number of trials will reduce by one \n" +
                 "Every time you guess a character correctly, the letter will be filled in all its positions in the word\n\n" +
                 "Do you want to play the Game? Use Yes or No ";
         //ObjectOutputStream outStream = new ObjectOutputStream(clientSocket.getOutputStream());
-        connectionHandler.sendMessage(welcomemessage);
+        connectionHandler.sendMessage(wordPicked);
     }
 
 
