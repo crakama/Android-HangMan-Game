@@ -6,5 +6,8 @@ package com.crakama.hangmandroidclient;
 
 public interface ConnectionPresenterInt {
     void connectToServer(String ipAddress);
+<<<<<<< HEAD
     void replyToClient(String reply);
+=======
+>>>>>>> de414d6... Update Model View Presenter
 }

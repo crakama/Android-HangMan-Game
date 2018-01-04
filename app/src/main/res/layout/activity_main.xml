@@ -15,6 +15,7 @@ tools:context=".MainActivity">
     android:layout_height="match_parent" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 </RelativeLayout>
 =======
     <TextView
@@ -51,3 +52,6 @@ tools:context=".MainActivity">
 
 </android.support.constraint.ConstraintLayout>
 >>>>>>> a661645... "set up TCP server client communication"
+=======
+</RelativeLayout>
+>>>>>>> de414d6... Update Model View Presenter
