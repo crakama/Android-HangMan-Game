@@ -25,6 +25,9 @@
       </formatting-settings>
     </DBN-SQL>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8da5bb6... "Use Model View Presenter"
     <DBN-PSQL>
       <case-options enabled="false">
         <option name="KEYWORD_CASE" value="lower" />
@@ -49,7 +52,10 @@
         <option name="ITERATION_ELEMENTS_WRAPPING" value="chop_down_if_not_single" />
       </formatting-settings>
     </DBN-SQL>
+<<<<<<< HEAD
 =======
 >>>>>>> 1dbb8e2... Changes
+=======
+>>>>>>> 8da5bb6... "Use Model View Presenter"
   </code_scheme>
 </component>
