@@ -1,10 +1,10 @@
 #Internal package file, do not edit.
-#Thu Jan 04 19:12:20 CET 2018
-2.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\14
+#Fri Jan 05 16:29:21 CET 2018
+2.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
 5.set=DEX
 0.path=classes.dex
 2.baseType=DIRECTORY
-3.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\17
+3.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\14
 2.set=DEX
 1.path=classes.dex
 4.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12

@@ -1,36 +1,19 @@
 package com.crakama.hangmandroidclient;
 
-import android.net.Uri;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-<<<<<<< HEAD
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements MainInterface,
-                                                          ConnectionFragment.OnItemClickedListener {
-=======
-import android.widget.EditText;
-
-public class MainActivity extends AppCompatActivity implements ConnectionFragment.OnItemClickedListener {
-    private Handler handler;
->>>>>>> de414d6... Update Model View Presenter
+        ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener{
     private ConnectionPresenterInt connectionPresenterInt;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
         connectionPresenterInt = new ConnectionPresenterImpl(this);
-=======
-        this.handler = new Handler();
-
->>>>>>> de414d6... Update Model View Presenter
         if(findViewById(R.id.fragment_container) != null){
             if(savedInstanceState != null){
                 return;
@@ -46,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements ConnectionFragmen
     // Connection methods
     //-------------------------------------------------------------------------
 
-<<<<<<< HEAD
 
 
     @Override
@@ -56,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionFragmen
         connectionPresenterInt.connectToServer(ipAdress);
     }
 
-
+    @Override
     public void connectionInfo(final String setText) {
         new Thread()
         {
@@ -90,21 +72,27 @@ public class MainActivity extends AppCompatActivity implements ConnectionFragmen
             }
         }.start();
     }
-=======
->>>>>>> de414d6... Update Model View Presenter
+
     @Override
-    protected  void onDestroy(){
+    public void gameState(String reply){
+        //Call changeFragment
+    }
+    @Override
+    public void gameBtnClicked(String text){
+        //Tell presenter to pick user guess
+    }
+    @Override
+    public void changeFragment(Fragment newFragment) {
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onDestroy(){
         super.onDestroy();
     }
 
-<<<<<<< HEAD
 
-=======
-    @Override
-    public void connectionBtnClicked(String ipAdress) {
-
-        connectionPresenterInt = new ConnectionPresenterImpl();
-        connectionPresenterInt.connectToServer(ipAdress);
-    }
->>>>>>> de414d6... Update Model View Presenter
 }
