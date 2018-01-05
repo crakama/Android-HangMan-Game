@@ -11,4 +11,5 @@ public interface MainInterface {
     void connectionInfo(final String text);
     void gameState(String reply);
     void changeFragment(Fragment newFragment);
+    void startGameDig(String s);
 }

@@ -1,5 +1,6 @@
 package com.crakama.hangmandroidclient;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 /**
@@ -9,6 +10,7 @@ import android.util.Log;
 public class ConnectionPresenterImpl implements ConnectionPresenterInt {
     ConnectionInteractor connectionInteractor;
     private MainInterface mainInterface ;
+
 
     public ConnectionPresenterImpl(MainActivity mainActivity) {
         this.mainInterface = mainActivity;
@@ -28,11 +30,39 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
     public void replyToClient(String reply) {
         mainInterface.connectionInfo("Connected to server");
         //Tell Main View to Change Fragment and display reply
-        GameFragment gameFragment = new GameFragment();
-        mainInterface.changeFragment(gameFragment);
-        //mainInterface.gameState(reply);
+        mainInterface.startGameDig(reply);
 
     }
 
+    @Override
+    public void msgToServer(String msg) {
+        //TODO do something while waiting for server response
 
+       // connectionInteractor.clientServerRequests(msg);
+        new PresenterTask().execute(msg);
+    }
+    @Override
+    public void msgToClient(String serverReply){
+        //TODO :Always display this response somewhere on the user interface
+        //mainInterface.
+        mainInterface.gameState(serverReply);
+    }
+
+    class PresenterTask extends AsyncTask<String, Void,String>{
+        @Override
+        protected void onPreExecute(){
+            //TODO: Change fragment
+            GameFragment gameFragment = new GameFragment();
+            mainInterface.changeFragment(gameFragment);
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+            String str = strings[0];
+            return connectionInteractor.clientServerRequests(str);
+        }
+        @Override
+        protected void onPostExecute(String result){
+            mainInterface.gameState(result);
+        }
+    }
 }

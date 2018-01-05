@@ -99,6 +99,11 @@ public class ConnectionFragment extends Fragment{
     public void onDestroyView(){
         super.onDestroyView();
     }
+
+    public static void setGameState(String reply) {
+        //TODO update Text view on game status
+    }
+
     /**
      * Callback Interface
      * This interface must be implemented by activities that contain this fragment to allow an

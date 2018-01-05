@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Jan 05 16:29:21 CET 2018
+#Fri Jan 05 18:22:55 CET 2018
 2.base=D\:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
 5.set=DEX
 0.path=classes.dex

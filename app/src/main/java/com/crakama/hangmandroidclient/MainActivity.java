@@ -4,10 +4,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements MainInterface,
-        ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener{
+        ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener,
+InstructionsFragment.OnDialogListener{
     private ConnectionPresenterInt connectionPresenterInt;
+
+    //-------------------------------------------------------------------------
+    // Default methods
+    //-------------------------------------------------------------------------
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,11 @@ public class MainActivity extends AppCompatActivity implements MainInterface,
             connectionFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,connectionFragment).commit();
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
     }
 
 
@@ -56,6 +67,26 @@ public class MainActivity extends AppCompatActivity implements MainInterface,
     }
 
     @Override
+    public void gameState(final String reply) {
+        Log.i("SERVER", reply);
+        //ConnectionFragment.setGameState(reply);
+     /*        new Thread()
+        {
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    public void run()
+                    {
+                        // UI Update operations
+                        ConnectionFragment.setGameState(reply);
+                    }
+                });
+            }
+        }.start();*/
+    }
+
+    @Override
     public void setConnectionButton(final boolean enabled) {
         new Thread()
         {
@@ -73,9 +104,28 @@ public class MainActivity extends AppCompatActivity implements MainInterface,
         }.start();
     }
 
+    //-------------------------------------------------------------------------
+    // Fragment methods
+    //-------------------------------------------------------------------------
+
     @Override
-    public void gameState(String reply){
-        //Call changeFragment
+    public void startGameDig(String reply){
+        new Thread()
+        {
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    public void run()
+                    {
+                        // TODO: Change this to be a universal dialogue builder
+                        InstructionsFragment instructionsFragment = new InstructionsFragment();
+                        instructionsFragment.show(getSupportFragmentManager(),"Instructions Dialog");
+                    }
+                });
+            }
+        }.start();
+
     }
     @Override
     public void gameBtnClicked(String text){
@@ -90,9 +140,10 @@ public class MainActivity extends AppCompatActivity implements MainInterface,
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void btnOKClicked(String text) {
+        //TODO: Send instructions to server
+        connectionPresenterInt = new ConnectionPresenterImpl(this);
+        connectionPresenterInt.msgToServer(text);
+
     }
-
-
 }

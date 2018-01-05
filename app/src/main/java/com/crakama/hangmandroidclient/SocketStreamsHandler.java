@@ -9,19 +9,19 @@ import java.net.Socket;
  * Created by kate on 04/01/2018.
  */
 
-public class ConnectionHandler {
+public class SocketStreamsHandler {
     Socket clientSocket;
     ObjectOutputStream outStream;
     ObjectInputStream inputStream;
 
-    public ConnectionHandler(Socket clientHangSock) throws IOException {
-        System.out.println("ConnectionHandler original");
+    public SocketStreamsHandler(Socket clientHangSock) throws IOException {
+        System.out.println("SocketStreamsHandler original");
         this.clientSocket = clientHangSock;
         this.outStream = new ObjectOutputStream(clientSocket.getOutputStream());
         this.inputStream = new ObjectInputStream(clientSocket.getInputStream());
     }
 
-    public ConnectionHandler() {
+    public SocketStreamsHandler() {
 
     }
 
