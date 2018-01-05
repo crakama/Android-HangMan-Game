@@ -6,4 +6,6 @@ package com.crakama.hangmandroidclient;
 
 public interface ConnectionInteractor {
     void connectToServer(String ipAddress);
+
+
 }

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Project\\HangManDroid\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar\\values-ar.xml",
+            "outputFile": "D:\\Project\\AndroidSockets\\HangManDroidClient\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar\\values-ar.xml",
             "map": [
                 {
                     "source": "C:\\Users\\kate\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\61ff28b17310b2ad4f42888907d9d90d\\res\\values-ar\\values-ar.xml",

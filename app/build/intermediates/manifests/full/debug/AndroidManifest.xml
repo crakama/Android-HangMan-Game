@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.crakama.hangmandroid"
+    package="com.crakama.hangmandroidclient"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.crakama.hangmandroid.MainActivity" >
+        <activity android:name="com.crakama.hangmandroidclient.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

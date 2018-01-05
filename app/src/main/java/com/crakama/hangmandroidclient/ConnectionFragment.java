@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -19,11 +20,14 @@ import android.widget.EditText;
  * Use the {@link ConnectionFragment#//newConnectionInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConnectionFragment extends Fragment {
+public class ConnectionFragment extends Fragment{
 
 
     private OnItemClickedListener mListener;
-    EditText connection_ip;
+    private EditText connection_ip;
+    static TextView connection_info;
+    static Button connection_btn;
+    private static Boolean viewable = false;
 
     public ConnectionFragment() {
         // Required empty public constructor
@@ -32,18 +36,10 @@ public class ConnectionFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @paramparam1 Parameter 1.
-     * @paramparam2 Parameter 2.
-     * @return A new instance of fragment ConnectionFragment.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     /*   if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
     }
 
     @Override
@@ -53,13 +49,17 @@ public class ConnectionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_connection, container, false);
 
         this.connection_ip = (EditText) view.findViewById(R.id.connection_ip);
-        final Button button =
+        this.connection_info = view.findViewById(R.id.connection_info);
+
+        connection_btn =
                 (Button) view.findViewById(R.id.connection_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        connection_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onButtonPressed(v);
             }
         });
+
+        viewable = true;
         return view;
     }
 
@@ -70,6 +70,15 @@ public class ConnectionFragment extends Fragment {
         }
     }
 
+    public static void setConnectionInfo(final String text) {   //To Do..Transfer to fragment
+        if(viewable == true) {
+            ConnectionFragment.connection_info.setText(text);
+        }
+    }
+
+    public static void setButtonState(Boolean state){
+        connection_btn.setEnabled(state);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -93,12 +102,11 @@ public class ConnectionFragment extends Fragment {
     }
     /**
      * Callback Interface
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
+     * This interface must be implemented by activities that contain this fragment to allow an
+     * interaction in this fragment to be communicated to the activity and potentially other
+     * fragments contained in that activity.
      */
+
     public interface OnItemClickedListener {
         // TODO: Update argument type and name
         void connectionBtnClicked(String text);
