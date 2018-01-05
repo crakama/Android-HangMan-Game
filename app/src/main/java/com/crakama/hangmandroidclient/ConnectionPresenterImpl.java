@@ -37,8 +37,6 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
     @Override
     public void msgToServer(String msg) {
         //TODO do something while waiting for server response
-
-       // connectionInteractor.clientServerRequests(msg);
         new PresenterTask().execute(msg);
     }
     @Override

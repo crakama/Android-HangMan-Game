@@ -35,14 +35,15 @@ public class RequestsHandler implements Runnable{
                         break;
                     case "yes":
                         //Start
-                        serveInterface.startGame(connectionHandler, clientSocket);
+                        //serveInterface.startGame(connectionHandler, clientSocket);
+                        serveInterface.playGame(connectionHandler);
                         System.out.println("LOOP ENDED");
                         break;
                     case "quit":
                         break;
                     default:
                         //serveInterface = new ServerInterfaceImpl(connectionHandler,readDataStr);
-                        serveInterface.playGame(connectionHandler);
+                        //serveInterface.playGame(connectionHandler);
                         break;
                 }
             }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -22,7 +23,7 @@ public class GameFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    static TextView game_word;
     EditText guesses;
     static Button game_button;
     private static Boolean viewable = false;
@@ -56,7 +57,7 @@ public class GameFragment extends Fragment {
         if (getArguments() != null) {
 
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
 
         }
     }
@@ -68,6 +69,7 @@ public class GameFragment extends Fragment {
         this.guesses = (EditText) view.findViewById(R.id.game_guess);
         game_button =
                 (Button) view.findViewById(R.id.game_button);
+        this.game_word = view.findViewById(R.id.game_word);
         game_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onButtonPressed(v);
@@ -75,6 +77,11 @@ public class GameFragment extends Fragment {
         });
         viewable = true;
         return view;
+    }
+    public static void setGameInfo(final String text) {   //To Do..Transfer to fragment
+        if(viewable == true) {
+            GameFragment.game_word.setText(text);
+        }
     }
 
     // TODO: pick user guesses and pass to activity--presenter--interactor--server

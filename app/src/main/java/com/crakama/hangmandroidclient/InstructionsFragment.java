@@ -17,11 +17,11 @@ public class InstructionsFragment extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_instructions,null);
+        String reply = getArguments().getString("reply");
 
-        builder.setView(view).setTitle("Game Instructions").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Game Instructions").setMessage(reply).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         }).setPositiveButton("Play", new DialogInterface.OnClickListener() {
             @Override

@@ -61,7 +61,7 @@ public class ConnectionInteractorImpl implements ConnectionInteractor {
 
                         receivedMesg[0] = socketStreamsHandler.readMessage();
                         connectionPresenterInt = new ConnectionPresenterImpl(mainActivity);
-                        connectionPresenterInt.msgToClient(receivedMesg[0]);
+                        //connectionPresenterInt.msgToClient(receivedMesg[0]);
 
                     } catch (ClassNotFoundException|IOException e) {
                         e.printStackTrace();

@@ -66,25 +66,6 @@ InstructionsFragment.OnDialogListener{
         }.start();
     }
 
-    @Override
-    public void gameState(final String reply) {
-        Log.i("SERVER", reply);
-        //ConnectionFragment.setGameState(reply);
-     /*        new Thread()
-        {
-            public void run()
-            {
-                runOnUiThread(new Runnable()
-                {
-                    public void run()
-                    {
-                        // UI Update operations
-                        ConnectionFragment.setGameState(reply);
-                    }
-                });
-            }
-        }.start();*/
-    }
 
     @Override
     public void setConnectionButton(final boolean enabled) {
@@ -105,11 +86,11 @@ InstructionsFragment.OnDialogListener{
     }
 
     //-------------------------------------------------------------------------
-    // Fragment methods
+    // Game methods
     //-------------------------------------------------------------------------
 
     @Override
-    public void startGameDig(String reply){
+    public void startGameDig(final String reply){
         new Thread()
         {
             public void run()
@@ -120,6 +101,9 @@ InstructionsFragment.OnDialogListener{
                     {
                         // TODO: Change this to be a universal dialogue builder
                         InstructionsFragment instructionsFragment = new InstructionsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("reply", reply);
+                        instructionsFragment.setArguments(args);
                         instructionsFragment.show(getSupportFragmentManager(),"Instructions Dialog");
                     }
                 });
@@ -127,9 +111,17 @@ InstructionsFragment.OnDialogListener{
         }.start();
 
     }
+
+    @Override
+    public void gameState(final String reply) {
+        Log.i("SERVER", reply);
+        //TODO calla method in fragment
+        GameFragment.setGameInfo(reply);
+    }
+
     @Override
     public void gameBtnClicked(String text){
-        //Tell presenter to pick user guess
+        connectionPresenterInt.msgToServer(text);
     }
     @Override
     public void changeFragment(Fragment newFragment) {

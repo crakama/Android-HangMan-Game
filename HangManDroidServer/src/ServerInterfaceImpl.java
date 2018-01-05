@@ -54,11 +54,10 @@ public class ServerInterfaceImpl implements ServeInterface {
     @Override
     public void initializeGame(Socket clientSocket) throws IOException {
         //Send game instructions
-        String wordPicked = "Welcome to HangMan. I will pick a word and you will try to guess it character by character.\n" +
-                "If you guess wrong 6 times...I WIN! If you get the word before hand...YOU WIN!.\n" +
-                "Every time you guess a character incorrectly, the number of trials will reduce by one \n" +
-                "Every time you guess a character correctly, the letter will be filled in all its positions in the word\n\n" +
-                "Do you want to play the Game? Use Yes or No ";
+        String wordPicked = "Welcome to HangMan. I will pick a word and you will try to guess it character by character.\n\n" +
+                "If you guess wrong 6 times...I WIN! If you get the word before hand...YOU WIN!.\n\n" +
+                "Every time you guess a character incorrectly, the number of trials will reduce by one \n\n" +
+                "Every time you guess a character correctly, the letter will be filled in all its positions in the word\n\n";
         //ObjectOutputStream outStream = new ObjectOutputStream(clientSocket.getOutputStream());
         connectionHandler.sendMessage(wordPicked);
     }
@@ -68,7 +67,7 @@ public class ServerInterfaceImpl implements ServeInterface {
     public void playGame(ConnectionHandler connHandler) throws IOException, ClassNotFoundException {
         generateNewWord();
         String s = "\n Enter a character that you think is in the word";
-        connectionHandler.sendMessage(":::Current Game Status:::" + informationMessage()+"\n" + "Current word picked is::::" + currentWord + s);
+        connectionHandler.sendMessage(":::Current Game Status:::" + informationMessage()+"\n" + "::::" + currentWord + s);
 
         while (true) {
             String msg = connectionHandler.readMessage();

@@ -11,14 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ConnectionFragment.OnItemClickedListener} interface
- * to handle interaction events.
- * Use the {@link ConnectionFragment#//newConnectionInstance} factory method to
- * create an instance of this fragment.
- */
+    /**
+     * create an instance of this fragment.
+     */
 public class ConnectionFragment extends Fragment{
 
 
@@ -29,12 +24,10 @@ public class ConnectionFragment extends Fragment{
     private static Boolean viewable = false;
 
     public ConnectionFragment() {
-        // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Use this factory method to create a new instance of this fragment using the provided parameters.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +37,6 @@ public class ConnectionFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_connection, container, false);
 
         this.connection_ip = (EditText) view.findViewById(R.id.connection_ip);
@@ -100,15 +92,8 @@ public class ConnectionFragment extends Fragment{
         super.onDestroyView();
     }
 
-    public static void setGameState(String reply) {
-        //TODO update Text view on game status
-    }
-
     /**
      * Callback Interface
-     * This interface must be implemented by activities that contain this fragment to allow an
-     * interaction in this fragment to be communicated to the activity and potentially other
-     * fragments contained in that activity.
      */
 
     public interface OnItemClickedListener {
