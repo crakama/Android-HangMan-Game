@@ -38,6 +38,12 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
     public void msgToServer(String msg) {
         //TODO do something while waiting for server response
         new PresenterTask().execute(msg);
+        /*        if(msg.equalsIgnoreCase("yes")){
+                    new PresenterTask().execute(msg);
+                }else {
+                    new NormalPresenterTask().execute(msg);
+                }*/
+
     }
     @Override
     public void msgToClient(String serverReply){
@@ -52,6 +58,22 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
             //TODO: Change fragment
             GameFragment gameFragment = new GameFragment();
             mainInterface.changeFragment(gameFragment);
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+            String str = strings[0];
+            return connectionInteractor.clientServerRequests(str);
+        }
+        @Override
+        protected void onPostExecute(String result){
+            mainInterface.gameState(result);
+        }
+    }
+
+    class NormalPresenterTask extends AsyncTask<String, Void,String>{
+        @Override
+        protected void onPreExecute(){
+
         }
         @Override
         protected String doInBackground(String... strings) {

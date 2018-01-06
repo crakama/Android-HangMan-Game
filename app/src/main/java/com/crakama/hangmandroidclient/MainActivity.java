@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements MainInterface,
         ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener,
-InstructionsFragment.OnDialogListener{
+InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
     private ConnectionPresenterInt connectionPresenterInt;
 
     //-------------------------------------------------------------------------
@@ -116,7 +116,17 @@ InstructionsFragment.OnDialogListener{
     public void gameState(final String reply) {
         Log.i("SERVER", reply);
         //TODO calla method in fragment
-        GameFragment.setGameInfo(reply);
+        if(reply.substring(0,12).equals("You win with")){
+            WinFragment winFragment = new WinFragment();
+            Bundle args = new Bundle();
+            args.putString("win", reply);
+            winFragment.setArguments(args);
+            winFragment.show(getSupportFragmentManager(),"Win Dialog");
+
+        }else {
+            GameFragment.setGameInfo(reply);
+        }
+
     }
 
     @Override
