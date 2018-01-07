@@ -1,4 +1,4 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,11 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crakama.hangmandroidclient.R;
 
-    /**
+
+/**
      * create an instance of this fragment.
      */
-public class StartFragment extends Fragment{
+public class HomeFragment extends Fragment{
 
 
     private OnItemClickedListener mListener;
@@ -23,7 +25,7 @@ public class StartFragment extends Fragment{
     static Button connection_btn;
     private static Boolean viewable = false;
 
-    public StartFragment() {
+    public HomeFragment() {
     }
 
     /**
@@ -63,7 +65,7 @@ public class StartFragment extends Fragment{
 
     public static void setConnectionInfo(final String text) {   //To Do..Transfer to fragment
         if(viewable == true) {
-            StartFragment.connection_info.setText(text);
+            HomeFragment.connection_info.setText(text);
         }
     }
 

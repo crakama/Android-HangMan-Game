@@ -1,4 +1,4 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.startup;
 
 import android.os.Bundle;
 import android.os.Message;

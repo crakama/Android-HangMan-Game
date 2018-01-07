@@ -1,4 +1,4 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.net;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

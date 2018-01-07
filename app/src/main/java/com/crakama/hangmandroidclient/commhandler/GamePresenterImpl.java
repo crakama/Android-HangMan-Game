@@ -1,9 +1,14 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.commhandler;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
+
+import com.crakama.hangmandroidclient.net.ServerInteractorImpl;
+import com.crakama.hangmandroidclient.net.ServerInteractorInt;
+import com.crakama.hangmandroidclient.startup.MainActivity;
+import com.crakama.hangmandroidclient.startup.MainInterface;
+import com.crakama.hangmandroidclient.ui.GameFragment;
 
 /**
  * Created by kate on 04/01/2018.
@@ -21,7 +26,6 @@ public class GamePresenterImpl implements GamePresenterInt {
 
     @Override
     public void connectToServer(final String ipAddress) {
-        Log.i("CLIENT IP PICKED", ipAddress);
         mainInterface.setConnectionButton(false);
         mainInterface.connectionInfo("Connecting... Please wait");
         serverInteractorInt.connectToServer(ipAddress);
@@ -30,13 +34,12 @@ public class GamePresenterImpl implements GamePresenterInt {
     @Override
     public void replyToClient(String reply) {
         mainInterface.connectionInfo("Connected to server");
-        //Tell Main View to Change Fragment and display reply
         mainInterface.startGameDig(reply);
 
     }
 
     @Override
-    public void msgToServer(String msg) {
+    public void startAsyncTask(String msg) {
         //TODO do something while waiting for server response
         new PresenterTask().execute(msg);
          }

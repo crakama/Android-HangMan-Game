@@ -1,6 +1,10 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.net;
 
 import android.util.Log;
+
+import com.crakama.hangmandroidclient.commhandler.GamePresenterImpl;
+import com.crakama.hangmandroidclient.commhandler.GamePresenterInt;
+import com.crakama.hangmandroidclient.startup.MainActivity;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -18,7 +22,7 @@ public class ServerInteractorImpl implements ServerInteractorInt {
     private  Thread clientThread;
     private GamePresenterInt gamePresenterInt;
     private int PORT = 1212;
-    private  MainActivity mainActivity;
+    private MainActivity mainActivity;
     public ServerInteractorImpl(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }

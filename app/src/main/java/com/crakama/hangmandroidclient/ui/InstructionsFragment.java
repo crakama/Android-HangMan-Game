@@ -1,4 +1,4 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.ui;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.crakama.hangmandroidclient.R;
 
 
 public class InstructionsFragment extends AppCompatDialogFragment {

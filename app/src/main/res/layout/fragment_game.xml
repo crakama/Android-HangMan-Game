@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.crakama.hangmandroidclient.GameFragment">
+    tools:context="com.crakama.hangmandroidclient.ui.GameFragment">
 
     <LinearLayout
         android:id="@+id/game_state"

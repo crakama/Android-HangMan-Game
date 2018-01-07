@@ -1,4 +1,4 @@
-package com.crakama.hangmandroidclient;
+package com.crakama.hangmandroidclient.net;
 
 /**
  * Created by kate on 04/01/2018.

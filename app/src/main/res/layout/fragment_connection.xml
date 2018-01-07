@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.crakama.hangmandroidclient.StartFragment">
+    tools:context="com.crakama.hangmandroidclient.ui.HomeFragment">
 
     <ImageView
         android:id="@+id/connection_image"
