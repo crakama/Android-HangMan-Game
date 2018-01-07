@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements MainInterface,
         ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener,
@@ -19,6 +23,9 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         connectionPresenterInt = new ConnectionPresenterImpl(this);
         if(findViewById(R.id.fragment_container) != null){
             if(savedInstanceState != null){
@@ -28,6 +35,22 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
             connectionFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,connectionFragment).commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_exit){
+            finish();
+            System.exit(0);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
