@@ -21,18 +21,33 @@ public class WinFragment extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_instructions,null);
         String reply = getArguments().getString("win");
+        Bundle bundle = getArguments();
 
+        if(bundle.containsKey("win")){
+            builder.setView(view).setTitle("A WIN !!!").setMessage(reply).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            }).setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onWinOKButtonPressed(view, "yes");
+                }
+            });
+        }else {
+            builder.setView(view).setTitle("YOU LOOSE !!!").setMessage(reply).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            }).setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onWinOKButtonPressed(view, "yes");
+                }
+            });
 
-        builder.setView(view).setTitle("A WIN !!!").setMessage(reply).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        }).setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                onWinOKButtonPressed(view, "yes");
-            }
-        });
+        }
+
         return builder.create();
     }
 

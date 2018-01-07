@@ -1,6 +1,8 @@
 package com.crakama.hangmandroidclient;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 /**
@@ -46,43 +48,44 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
 
     }
     @Override
-    public void msgToClient(String serverReply){
+    public void msgToClient(Message serverReply){
         //TODO :Always display this response somewhere on the user interface
         //mainInterface.
-        mainInterface.gameState(serverReply);
+
+
     }
 
-    class PresenterTask extends AsyncTask<String, Void,String>{
+    class PresenterTask extends AsyncTask<String, Void,String> {
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             //TODO: Change fragment
             GameFragment gameFragment = new GameFragment();
             mainInterface.changeFragment(gameFragment);
         }
+
         @Override
         protected String doInBackground(String... strings) {
             String str = strings[0];
             return connectionInteractor.clientServerRequests(str);
         }
+
         @Override
-        protected void onPostExecute(String result){
-            mainInterface.gameState(result);
+        protected void onPostExecute(String result) {
+            Message serverMessage = Message.obtain();
+            if (result.substring(0, 12).equals("You win with")) {
+                Bundle args = new Bundle();
+                args.putString("win", result);
+                mainInterface.gameState(result, args);
+            } else if (result.substring(0, 10).equals("You loose,")) {
+                Bundle args = new Bundle();
+                args.putString("loose", result);
+                mainInterface.gameState(result, args);
+            } else {
+            serverMessage.obj = result;
+            mainInterface.gameInfo(serverMessage);
+            }
+         }
         }
     }
 
-    class NormalPresenterTask extends AsyncTask<String, Void,String>{
-        @Override
-        protected void onPreExecute(){
 
-        }
-        @Override
-        protected String doInBackground(String... strings) {
-            String str = strings[0];
-            return connectionInteractor.clientServerRequests(str);
-        }
-        @Override
-        protected void onPostExecute(String result){
-            mainInterface.gameState(result);
-        }
-    }
-}
