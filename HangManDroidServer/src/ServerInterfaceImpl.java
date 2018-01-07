@@ -31,9 +31,7 @@ public class ServerInterfaceImpl implements ServeInterface {
      * @throws IOException
      */
     public ServerInterfaceImpl(ConnectionHandler connectionHandler) throws IOException {
-        System.out.println("ConnectionHandler ServerInterfaceImpl 1");
         this.connectionHandler = connectionHandler;
-        System.out.println("ConnectionHandler ServerInterfaceImpl 2");
 
     }
     public ServerInterfaceImpl(){
@@ -45,11 +43,6 @@ public class ServerInterfaceImpl implements ServeInterface {
      */
 
 
-    @Override
-    public void startGame(ConnectionHandler connectionHandler, Socket clientSocket) throws IOException, ClassNotFoundException {
-        String s = "\n PRESS ENTER !!!";
-        connectionHandler.sendMessage(":::Initial Game set up:::" + informationMessage()+"\n" + s);
-    }
 
     @Override
     public void initializeGame(Socket clientSocket) throws IOException {
@@ -58,16 +51,17 @@ public class ServerInterfaceImpl implements ServeInterface {
                 "If you guess wrong 6 times...I WIN! If you get the word before hand...YOU WIN!.\n\n" +
                 "Every time you guess a character incorrectly, the number of trials will reduce by one \n\n" +
                 "Every time you guess a character correctly, the letter will be filled in all its positions in the word\n\n";
-        //ObjectOutputStream outStream = new ObjectOutputStream(clientSocket.getOutputStream());
         connectionHandler.sendMessage(wordPicked);
     }
 
 
     @Override
     public void playGame(ConnectionHandler connHandler) throws IOException, ClassNotFoundException {
+        System.out.println("\nGame Started !!!");
         generateNewWord();
         String s = "\n Enter a character that you think is in the word";
-        connectionHandler.sendMessage(":::Current Game Status:::" + informationMessage()+"\n" + "::::" + currentWord + s);
+        connectionHandler.sendMessage("\n:::Current Game Status:::\n" + informationMessage() +"\n" + s);
+        System.out.println("\nWord Picked:  " + currentWord);
 
         while (true) {
             String msg = connectionHandler.readMessage();
@@ -101,15 +95,14 @@ public class ServerInterfaceImpl implements ServeInterface {
                     }
 
                 } else { // Wrong character guess
-                    if (++failedAttempts > currentWord.length()) {
-                        connectionHandler.sendMessage("You loose, the correct word was " + currentWord + " ");
+                    if (++failedAttempts >= currentWord.length()) {
 
-                        --this.score;//decrease score counter
+
+                        --this.score;
 
                         generateNewWord();
-
-                        //sends hidden word
-                        connectionHandler.sendMessage(informationMessage());
+                        String wordGuess = "You loose, the correct word was ";
+                        connectionHandler.sendMessage(  wordGuess+ currentWord + "\n "+ informationMessage());
                     } else {
                         connectionHandler.sendMessage(informationMessage());
                     }
@@ -119,29 +112,23 @@ public class ServerInterfaceImpl implements ServeInterface {
                 // A guess on full word has been done
                 guesses.add(msg);
                 if(currentWord.equalsIgnoreCase(msg)) { // win
-                    connectionHandler.sendMessage("You win with " + failedAttempts + " number of fail attempts");
-
                     ++this.score;//increase score counter
                     generateNewWord();
-                    connectionHandler.sendMessage(informationMessage()); // announce win and give new word
+                    connectionHandler.sendMessage("You win with " + failedAttempts + " number of fail attempts\n"+informationMessage());
                 }
                 else {
                     if(++failedAttempts>currentWord.length() && msg.length()>currentWord.length()){//loose
-                        connectionHandler.sendMessage("You loose, the correct word was " + currentWord );
+
 
                         --this.score;//decrease score counter
-
                         generateNewWord();
+                        connectionHandler.sendMessage("You loose, the correct word was " + currentWord+"\n"+informationMessage() );
 
-                        //sends hidden word
-                        connectionHandler.sendMessage(informationMessage());
                     } else{
                         connectionHandler.sendMessage(informationMessage());
 
                     }
                 }
-
-                // System.out.println("Client with id " + this.getId() + " says: " + msg);
             }
         }// end while
     }
@@ -151,11 +138,10 @@ public class ServerInterfaceImpl implements ServeInterface {
      */
     private void generateNewWord() throws IOException {
 
-        guesses.clear(); //Empty guesses
+        //guesses.clear(); //Empty guesses
         readFile();
-        failedAttempts = 0;
+        failedAttempts = failedAttempts;
         currentWord = pickWord();
-        System.out.println("thread with id : "  + " get word: " + currentWord);
 
         /*** Hide characters in word***/
         StringBuilder str = new StringBuilder();

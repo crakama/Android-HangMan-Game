@@ -14,7 +14,7 @@ import android.widget.TextView;
     /**
      * create an instance of this fragment.
      */
-public class ConnectionFragment extends Fragment{
+public class StartFragment extends Fragment{
 
 
     private OnItemClickedListener mListener;
@@ -23,7 +23,7 @@ public class ConnectionFragment extends Fragment{
     static Button connection_btn;
     private static Boolean viewable = false;
 
-    public ConnectionFragment() {
+    public StartFragment() {
     }
 
     /**
@@ -39,11 +39,11 @@ public class ConnectionFragment extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_connection, container, false);
 
-        this.connection_ip = (EditText) view.findViewById(R.id.connection_ip);
-        this.connection_info = view.findViewById(R.id.connection_info);
+        this.connection_ip = view.findViewById(R.id.connection_ip);
+        connection_info = view.findViewById(R.id.connection_info);
 
         connection_btn =
-                (Button) view.findViewById(R.id.connection_button);
+                view.findViewById(R.id.connection_button);
         connection_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onButtonPressed(v);
@@ -63,7 +63,7 @@ public class ConnectionFragment extends Fragment{
 
     public static void setConnectionInfo(final String text) {   //To Do..Transfer to fragment
         if(viewable == true) {
-            ConnectionFragment.connection_info.setText(text);
+            StartFragment.connection_info.setText(text);
         }
     }
 

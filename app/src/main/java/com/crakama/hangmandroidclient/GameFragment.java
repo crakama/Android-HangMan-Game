@@ -66,10 +66,10 @@ public class GameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
-        this.guesses = (EditText) view.findViewById(R.id.game_guess);
+        this.guesses = view.findViewById(R.id.game_guess);
         game_button =
-                (Button) view.findViewById(R.id.game_button);
-        this.game_word = view.findViewById(R.id.game_word);
+                view.findViewById(R.id.game_button);
+        game_word = view.findViewById(R.id.game_word);
         game_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onButtonPressed(v);

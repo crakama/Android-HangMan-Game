@@ -11,15 +11,15 @@ import java.util.Queue;
  * Created by kate on 04/01/2018.
  */
 
-public class ConnectionInteractorImpl implements ConnectionInteractor {
+public class ServerInteractorImpl implements ServerInteractorInt {
+    static SocketStreamsHandler socketStreamsHandler;
+    Queue<SocketStreamsHandler> q = new LinkedList<SocketStreamsHandler>();
     private Socket clientSocket;
     private  Thread clientThread;
-    static SocketStreamsHandler socketStreamsHandler;
-    private ConnectionPresenterInt connectionPresenterInt;
+    private GamePresenterInt gamePresenterInt;
     private int PORT = 1212;
     private  MainActivity mainActivity;
-    Queue<SocketStreamsHandler> q = new LinkedList<SocketStreamsHandler>();
-    public ConnectionInteractorImpl(MainActivity mainActivity) {
+    public ServerInteractorImpl(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
@@ -30,13 +30,13 @@ public class ConnectionInteractorImpl implements ConnectionInteractor {
             public void run() {
                 try {
                     clientSocket = new Socket(ipAddress,PORT);
-                    ConnectionInteractorImpl.socketStreamsHandler = new SocketStreamsHandler(clientSocket);
+                    ServerInteractorImpl.socketStreamsHandler = new SocketStreamsHandler(clientSocket);
                     q.add(socketStreamsHandler);
                     socketStreamsHandler.sendMessage("start");
 
                     String msg =   socketStreamsHandler.readMessage();
-                    connectionPresenterInt = new ConnectionPresenterImpl(mainActivity);
-                    connectionPresenterInt.replyToClient(msg);
+                    gamePresenterInt = new GamePresenterImpl(mainActivity);
+                    gamePresenterInt.replyToClient(msg);
                     Log.i("SERVER", msg);
                 } catch (ClassNotFoundException|IOException e) {
                     e.printStackTrace();
@@ -54,19 +54,23 @@ public class ConnectionInteractorImpl implements ConnectionInteractor {
             @Override
             public void run() {
                 //socketStreamsHandler = q.element();
-
-                //while (socketStreamsHandler.isConnected()){
+                if(socketStreamsHandler.isConnected()){
                     try {
                         socketStreamsHandler.sendMessage(msg);
 
                         receivedMesg[0] = socketStreamsHandler.readMessage();
-                        connectionPresenterInt = new ConnectionPresenterImpl(mainActivity);
-                        //connectionPresenterInt.msgToClient(receivedMesg[0]);
+                        gamePresenterInt = new GamePresenterImpl(mainActivity);
+
 
                     } catch (ClassNotFoundException|IOException e) {
                         e.printStackTrace();
+                        gamePresenterInt.failedConnection("Connection to Server Failed");
                     }
-                //}
+                }else {
+                    //receivedMesg[0] = "Connection to Server Failed";
+                }
+
+
             }
         });
         clientThread.start();

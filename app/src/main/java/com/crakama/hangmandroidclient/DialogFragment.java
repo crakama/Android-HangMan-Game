@@ -13,20 +13,24 @@ import android.view.View;
  * Created by kate on 06/01/2018.
  */
 
-public class WinFragment extends AppCompatDialogFragment {
+public class DialogFragment extends AppCompatDialogFragment {
     private OnWinDialogListener mListener;
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.fragment_instructions,null);
-        String reply = getArguments().getString("win");
+
+
+
         Bundle bundle = getArguments();
 
         if(bundle.containsKey("win")){
+            String reply = getArguments().getString("win");
             builder.setView(view).setTitle("A WIN !!!").setMessage(reply).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    System.exit(0);
                 }
             }).setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
                 @Override
@@ -34,10 +38,12 @@ public class WinFragment extends AppCompatDialogFragment {
                     onWinOKButtonPressed(view, "yes");
                 }
             });
-        }else {
-            builder.setView(view).setTitle("YOU LOOSE !!!").setMessage(reply).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+        }else if(bundle.containsKey("loose")){
+            String reply1 = getArguments().getString("loose");
+            builder.setView(view).setTitle("YOU LOOSE !!!").setMessage(reply1).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    System.exit(0);
                 }
             }).setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
                 @Override
@@ -46,6 +52,15 @@ public class WinFragment extends AppCompatDialogFragment {
                 }
             });
 
+        }else {
+            String reply2 = getArguments().getString("reply");
+            builder.setView(view).setTitle("SERVER CONNECTION FAILED!!!").setMessage(reply2).
+                    setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.exit(0);
+                }
+            });
         }
 
         return builder.create();

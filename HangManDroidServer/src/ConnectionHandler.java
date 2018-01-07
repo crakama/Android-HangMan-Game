@@ -13,7 +13,6 @@ public class ConnectionHandler {
     ObjectInputStream inputStream;
 
     public ConnectionHandler(Socket clientHangSock) throws IOException {
-        System.out.println("ConnectionHandler original");
         this.clientSocket = clientHangSock;
         this.outStream = new ObjectOutputStream(clientSocket.getOutputStream());
         this.inputStream = new ObjectInputStream(clientSocket.getInputStream());

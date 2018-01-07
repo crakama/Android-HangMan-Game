@@ -20,11 +20,11 @@ public class ServerHangMan {
 
     public void initConnection(int port) throws IOException, ClassNotFoundException {
         serverSocket = new ServerSocket(port);
-        System.out.println("Server Started:::...");
+        System.out.println("\nServer Started:::...");
 
         while (true){
             clientSocket = serverSocket.accept();
-            System.out.println("Server Accepted Connection:::");
+            System.out.println("\nServer Accepted Connection:::");
             startClientHandler(clientSocket);
         }
     }

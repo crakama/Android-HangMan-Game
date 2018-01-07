@@ -22,28 +22,22 @@ public class RequestsHandler implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("Server is Running:::...");
+        System.out.println("\nServer is Running, waiting for clients Requests:::...");
         try {
 
             while (true){
                 String readDataStr = connectionHandler.readMessage();
-                System.out.println(readDataStr);
                 switch (readDataStr){
                     case "start":
                         serveInterface.initializeGame(clientSocket);
-                        System.out.println("Start thread finished");
                         break;
                     case "yes":
-                        //Start
-                        //serveInterface.startGame(connectionHandler, clientSocket);
                         serveInterface.playGame(connectionHandler);
-                        System.out.println("LOOP ENDED");
                         break;
                     case "quit":
                         break;
                     default:
-                        //serveInterface = new ServerInterfaceImpl(connectionHandler,readDataStr);
-                        //serveInterface.playGame(connectionHandler);
+                        serveInterface.playGame(connectionHandler);
                         break;
                 }
             }
@@ -51,7 +45,6 @@ public class RequestsHandler implements Runnable{
             e.printStackTrace();
         }
     }
-    //TO DO Have a server interface and its Impl and migrate this method then invoke the method by reference.
     public void processRequests(){
 
     }

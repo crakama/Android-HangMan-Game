@@ -9,14 +9,14 @@ import android.util.Log;
  * Created by kate on 04/01/2018.
  */
 
-public class ConnectionPresenterImpl implements ConnectionPresenterInt {
-    ConnectionInteractor connectionInteractor;
+public class GamePresenterImpl implements GamePresenterInt {
+    ServerInteractorInt serverInteractorInt;
     private MainInterface mainInterface ;
 
 
-    public ConnectionPresenterImpl(MainActivity mainActivity) {
+    public GamePresenterImpl(MainActivity mainActivity) {
         this.mainInterface = mainActivity;
-        this.connectionInteractor = new ConnectionInteractorImpl(mainActivity);
+        this.serverInteractorInt = new ServerInteractorImpl(mainActivity);
     }
 
     @Override
@@ -24,8 +24,7 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
         Log.i("CLIENT IP PICKED", ipAddress);
         mainInterface.setConnectionButton(false);
         mainInterface.connectionInfo("Connecting... Please wait");
-        //connectionInteractor = new ConnectionInteractorImpl();
-        connectionInteractor.connectToServer(ipAddress);
+        serverInteractorInt.connectToServer(ipAddress);
     }
 
     @Override
@@ -40,18 +39,12 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
     public void msgToServer(String msg) {
         //TODO do something while waiting for server response
         new PresenterTask().execute(msg);
-        /*        if(msg.equalsIgnoreCase("yes")){
-                    new PresenterTask().execute(msg);
-                }else {
-                    new NormalPresenterTask().execute(msg);
-                }*/
-
-    }
+         }
     @Override
-    public void msgToClient(Message serverReply){
-        //TODO :Always display this response somewhere on the user interface
-        //mainInterface.
-
+    public void failedConnection(String failCon){
+        Bundle args = new Bundle();
+        args.putString("fail", failCon);
+        mainInterface.gameState(failCon, args);
 
     }
 
@@ -66,13 +59,18 @@ public class ConnectionPresenterImpl implements ConnectionPresenterInt {
         @Override
         protected String doInBackground(String... strings) {
             String str = strings[0];
-            return connectionInteractor.clientServerRequests(str);
+            return serverInteractorInt.clientServerRequests(str);
         }
 
         @Override
         protected void onPostExecute(String result) {
             Message serverMessage = Message.obtain();
-            if (result.substring(0, 12).equals("You win with")) {
+            if(result == null){
+                String fail = "Connection to Server Failed !!!!";
+                Bundle args = new Bundle();
+                args.putString("fail", fail);
+                mainInterface.gameState(fail, args);
+            }else if (result.substring(0, 12).equals("You win with")) {
                 Bundle args = new Bundle();
                 args.putString("win", result);
                 mainInterface.gameState(result, args);

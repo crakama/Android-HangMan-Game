@@ -12,9 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements MainInterface,
-        ConnectionFragment.OnItemClickedListener,GameFragment.OnGameFragListener,
-InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
-    private ConnectionPresenterInt connectionPresenterInt;
+        StartFragment.OnItemClickedListener,GameFragment.OnGameFragListener,
+InstructionsFragment.OnDialogListener,DialogFragment.OnWinDialogListener{
+    private GamePresenterInt gamePresenterInt;
 
     //-------------------------------------------------------------------------
     // Default methods
@@ -25,16 +25,16 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        connectionPresenterInt = new ConnectionPresenterImpl(this);
+        gamePresenterInt = new GamePresenterImpl(this);
         if(findViewById(R.id.fragment_container) != null){
             if(savedInstanceState != null){
                 return;
             }
-            ConnectionFragment connectionFragment = new ConnectionFragment();
-            connectionFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,connectionFragment).commit();
+            StartFragment startFragment = new StartFragment();
+            startFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, startFragment).commit();
         }
     }
 
@@ -69,8 +69,8 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
     @Override
     public void connectionBtnClicked(String ipAdress) {
 
-        connectionPresenterInt = new ConnectionPresenterImpl(this);
-        connectionPresenterInt.connectToServer(ipAdress);
+        gamePresenterInt = new GamePresenterImpl(this);
+        gamePresenterInt.connectToServer(ipAdress);
     }
 
     @Override
@@ -78,7 +78,7 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
        handler.post(new Runnable() {
            @Override
            public void run() {
-               ConnectionFragment.setConnectionInfo(setText);
+               StartFragment.setConnectionInfo(setText);
            }
        });
     }
@@ -89,7 +89,7 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
         handler.post(new Runnable() {
             @Override
             public void run() {
-                ConnectionFragment.setButtonState(enabled);
+                StartFragment.setButtonState(enabled);
             }
         });
     }
@@ -114,9 +114,10 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
 
     @Override
     public void gameState(final String reply,Bundle args) {
-            WinFragment winFragment = new WinFragment();
-            winFragment.setArguments(args);
-            winFragment.show(getSupportFragmentManager(),"Status Dialog");
+        System.out.println("REPLY" +reply);
+            DialogFragment dialogFragment = new DialogFragment();
+            dialogFragment.setArguments(args);
+            dialogFragment.show(getSupportFragmentManager(),"Status Dialog");
     }
 
     @Override
@@ -132,7 +133,7 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
     };
     @Override
     public void gameBtnClicked(String text){
-        connectionPresenterInt.msgToServer(text);
+        gamePresenterInt.msgToServer(text);
     }
     @Override
     public void changeFragment(Fragment newFragment) {
@@ -145,8 +146,8 @@ InstructionsFragment.OnDialogListener,WinFragment.OnWinDialogListener{
     @Override
     public void btnOKClicked(String text) {
         //TODO: Send instructions to server
-        connectionPresenterInt = new ConnectionPresenterImpl(this);
-        connectionPresenterInt.msgToServer(text);
+        gamePresenterInt = new GamePresenterImpl(this);
+        gamePresenterInt.msgToServer(text);
 
     }
 }

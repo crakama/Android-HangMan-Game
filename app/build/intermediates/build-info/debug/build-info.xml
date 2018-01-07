@@ -3,29 +3,29 @@
     abi="x86"
     api-level="24"
     build-mode="FULL"
-    density="xxhdpi"
+    density="560dpi"
     format="10"
     plugin-version="3.0.1"
-    timestamp="1515293282107"
+    timestamp="1515324012598"
     token="5004960419504096160"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="701" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="144" />
+        duration="0" />
     <task
         name="verifier"
-        duration="32" />
+        duration="0" />
 
     <artifact
-        location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-        type="SPLIT" />
+        location="D:\Project\AndroidSockets\HangManDroidClient\app\build\outputs\apk\debug\app-debug.apk"
+        type="SPLIT_MAIN" />
     <artifact
         location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
         type="SPLIT" />
@@ -57,16 +57,16 @@
         location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
         type="SPLIT" />
     <artifact
-        location="D:\Project\AndroidSockets\HangManDroidClient\app\build\outputs\apk\debug\app-debug.apk"
-        type="SPLIT_MAIN" />
+        location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+        type="SPLIT" />
 
     <build
         build-mode="FULL"
-        timestamp="1515293282107"
+        timestamp="1515324012598"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-            type="SPLIT" />
+            location="D:\Project\AndroidSockets\HangManDroidClient\app\build\outputs\apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
         <artifact
             location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
@@ -98,8 +98,8 @@
             location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Project\AndroidSockets\HangManDroidClient\app\build\outputs\apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
+            location="D:\Project\AndroidSockets\HangManDroidClient\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
     </build>
 
 </instant-run>
