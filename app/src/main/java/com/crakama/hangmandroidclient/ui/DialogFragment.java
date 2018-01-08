@@ -55,7 +55,7 @@ public class DialogFragment extends AppCompatDialogFragment {
             });
 
         }else {
-            String reply2 = getArguments().getString("reply");
+            String reply2 = getArguments().getString("fail");
             builder.setView(view).setTitle("SERVER CONNECTION FAILED!!!").setMessage(reply2).
                     setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                 @Override
