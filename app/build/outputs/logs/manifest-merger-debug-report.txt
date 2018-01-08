@@ -93,10 +93,10 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\kate\.gradle\caches\
 		ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
 		ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:13:9-40
-activity#com.crakama.hangmandroidclient.MainActivity
+activity#com.crakama.hangmandroidclient.startup.MainActivity
 ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:14:9-20:20
 	android:name
-		ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:14:19-47
+		ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:14:19-55
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
 ADDED from D:\Project\AndroidSockets\HangManDroidClient\app\src\main\AndroidManifest.xml:15:13-19:29
 action#android.intent.action.MAIN
